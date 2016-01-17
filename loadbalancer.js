@@ -1,12 +1,12 @@
 // Project name: Instajam
 // Description: A platform to jam in real time with other musicians using MIDI devices
 //
-// I implemented a load balancer to manage load on subprocesses, and spawn new ones if necessary. The main advantage
-// of doing this is to ensure that the socket emissions and receptions dont block each other and high amounts of
-// traffic per second. There is a high percentage of time that our application exceeds the threshold for emissions
-// per second due to the data-filled nature of playing music, therefore introducing latency to users. Currently, using
-// callbacks in javascript will not take advantage of multi core environments and means that there will be synchronous
-// execution on the hardware level of socket emissions, even if performed with staggered async execution.
+// I implemented a load balancer to manage load on subprocesses, execute note transmission routines, and spawn new ones
+// if necessary. The main advantage of doing this is to ensure that the socket emissions and receptions dont block each
+// other and decrease latency when we have high amounts of note traffic per second. Our application has a high percentage of time
+// where it exceeds the threshold for emissions per second due to the data-filled nature of playing music, therefore introducing
+// latency to users. Currently, using callbacks in javascript will not take advantage of multi core environments and there will be
+// synchronous execution of socket emissions on the hardware level, even if performed with staggered async execution.
 //
 
 var child_process = require('child_process');
